@@ -1,0 +1,12 @@
+{
+    "port": 8088,
+    "repos": [
+        {
+            "url": "https://github.com/AquarHEAD/miaopull",
+            "path": "/Users/aquarhead/Projects/miaopull",
+            "watch": [
+                "master"
+            ]
+        }
+    ]
+}
