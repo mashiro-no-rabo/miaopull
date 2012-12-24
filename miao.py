@@ -25,27 +25,23 @@ def welcome():
 
 @app.route('/miao', methods=['POST'])
 def miaopull():
-    payload = ujson.load(request.form['payload'])
+    payload = ujson.loads(request.form['payload'])
     if 'canon_url' in payload:
         ptype = 'bitbucket'
         pbranch = payload['commits'][0]['branch']
-        purl = payload['canon_url']+payload['repository']['absolute_url']
     else:
         ptype = 'github'
         pbranch = payload['ref'].split('/')[-1]
-        purl = payload['repository']['url']
 
     for r in conf['repos']:
-        rurl = r['url']
         rpath = r['path']
         rwatch = r['watch']
-        if rurl == purl:
-            for b in rwatch:
-                if b == pbranch:
-                    if ptype == 'bitbucket':
-                        do_pull(payload['repository']['scm'], rpath, b)
-                    else:
-                        do_pull('git', rpath, b)
+        for b in rwatch:
+            if b == pbranch:
+                if ptype == 'bitbucket':
+                    do_pull(payload['repository']['scm'], rpath, b)
+                else:
+                    do_pull('git', rpath, b)
     return u"｢喵｣"
 
 if __name__ == "__main__":
