@@ -35,13 +35,12 @@ def miaopull():
 
     for r in conf['repos']:
         rpath = r['path']
-        rwatch = r['watch']
-        for b in rwatch:
-            if b == pbranch:
-                if ptype == 'bitbucket':
-                    do_pull(payload['repository']['scm'], rpath, b)
-                else:
-                    do_pull('git', rpath, b)
+        rbranch = r['branch']
+        if rbranch == pbranch:
+            if ptype == 'bitbucket':
+                do_pull(payload['repository']['scm'], rpath, b)
+            else:
+                do_pull('git', rpath, b)
     return u"｢喵｣"
 
 if __name__ == "__main__":
