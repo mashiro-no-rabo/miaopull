@@ -13,11 +13,11 @@ f.close()
 git_pull = '" && git reset --hard {} && git pull'
 hg_pull = '" && hg update -C && hg pull'
 
-def do_pull(type, path, branch):
+def do_pull(type, path, branch, command):
     if type == 'git':
-        call(['cd "' + path + git_pull.format(branch)], shell=True)
+        call(['cd "' + path + git_pull.format(branch) + ' && ' + command], shell=True)
     else:
-        call(['cd "' + path + hg_pull], shell=True)
+        call(['cd "' + path + hg_pull + ' && ' + command], shell=True)
 
 @app.route("/welcome")
 def welcome():
@@ -37,10 +37,11 @@ def miaopull():
         rpath = r['path']
         rbranch = r['branch']
         if rbranch == pbranch:
+            rcommand = r['command']
             if ptype == 'bitbucket':
-                do_pull(payload['repository']['scm'], rpath, b)
+                do_pull(payload['repository']['scm'], rpath, rbranch, rcommand)
             else:
-                do_pull('git', rpath, b)
+                do_pull('git', rpath, rbranch, rcommand)
     return u"｢喵｣"
 
 if __name__ == "__main__":
