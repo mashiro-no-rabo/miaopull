@@ -11,7 +11,7 @@ conf = ujson.loads(f.read())
 f.close()
 
 git_pull = '" && git reset --hard {} && git pull'
-hg_pull = '" && hg pull' # need to reset changes
+hg_pull = '" && hg update -C && hg pull'
 
 def do_pull(type, path, branch):
     if type == 'git':
