@@ -37,7 +37,8 @@ def miaopull():
         rpath = r['path']
         rbranch = r['branch']
         if rbranch == pbranch:
-            rcommand = r['command']
+            rcommands = r['commands']
+            rcommand = ' && '.join(rcommands)
             if ptype == 'bitbucket':
                 do_pull(payload['repository']['scm'], rpath, rbranch, rcommand)
             else:

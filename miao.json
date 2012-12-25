@@ -4,7 +4,10 @@
         {
             "path": "/Users/aquarhead/Projects/miaopull",
             "branch": "master",
-            "command": "mv settings_server.py settings.py"
+            "commands": [
+                "mv settings_server.py settings.py",
+                "mv consts_server.py consts.py"
+            ]
         }
     ]
 }
