@@ -1,5 +1,19 @@
 {
     "port": 8088,
+    "email_notify": false,
+    "email_settings": {
+        "host": "smtp.gmail.com",
+        "port": 465,
+        "mode": "ssl",
+        "login": "your_account@example.com",
+        "password": "your_gmail_password",
+        "sender_name": "｢喵｣",
+        "sender_email": "someone@example.com",
+        "default_recipients": [
+            "someone@example.com",
+            "someone_else@example.com"
+        ]
+    },
     "repos": [
         {
             "path": "/Users/aquarhead/Projects/miaopull",
@@ -7,6 +21,9 @@
             "commands": [
                 "mv settings_server.py settings.py",
                 "mv consts_server.py consts.py"
+            ],
+            "specify_recipients": [
+                "someone@example.com"
             ]
         }
     ]
